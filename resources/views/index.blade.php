@@ -3,29 +3,29 @@
 @section('container')
    <!-- ABOUT -->
    <section class="about full-screen d-lg-flex justify-content-center align-items-center" id="about">
-    <div class="container">
+      <div class="container">
         <div class="row">
-            
-            <div class="col-lg-7 col-md-12 col-12 d-flex align-items-center">
+            @foreach ($abouts as $about)
+              <div class="col-lg-7 col-md-12 col-12 d-flex align-items-center">
                 <div class="about-text">
-                    <h1 class="mr-2">Saya, Dwi Purnomo</h1>
-                    <h4>Seorang Junior Web Developer</h4>
-                           
-                    <p>Pengembangan website adalah bidang yang saya minati dan saya senang menghadapi tantangan yang terkait. Saya selalu bersemangat untuk belajar dan menerapkan teknologi terbaru dalam menciptakan pengalaman pengguna yang menarik dan responsif.</p>
+                    <h1 class="mr-2">{{ $about->h1 }}</h1>
+                    <h4>{{ $about->h4 }}</h4>
+                          
+                    <p>{{ $about->deskripsi }}</p>
                     
                     <div class="custom-btn-group mt-4">
-                      <a href="#" class="btn mr-lg-2 custom-btn"><i class='uil uil-file-alt'></i> Download Resume</a>
+                      <a href="{{ asset('storage/' . $about->cv) }}" class="btn mr-lg-2 custom-btn"><i class='uil uil-file-alt'></i> Download Resume</a>
                       <a href="#contact" class="btn custom-btn custom-btn-bg custom-btn-link">Hubungi Saya</a>
                     </div>
                 </div>
-            </div>
+              </div>
 
-            <div class="col-lg-5 col-md-12 col-12">
-                <div class="about-image svg">
-                    <img src="images/undraw/undraw_programming_re_kg9v.svg" class="img-fluid" alt="svg image">
-                </div>
-            </div>
-
+              <div class="col-lg-5 col-md-12 col-12">
+                  <div class="about-image svg">
+                    <img src="{{ asset('storage/' . $about->gambar) }}" class="img-fluid" alt="svg image">
+                  </div>
+              </div>
+            @endforeach
         </div>
     </div>
 </section>

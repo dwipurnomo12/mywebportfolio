@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<title>Azzara Bootstrap 4 Admin Dashboard</title>
+	<title>Admin Dashboard</title>
 	<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
 	<link rel="icon" href="/dashboard/assets/img/icon.ico" type="image/x-icon"/>
 
@@ -18,12 +18,18 @@
 		});
 	</script>
 
+	<script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+
 	<!-- CSS Files -->
 	<link rel="stylesheet" href="/dashboard/assets/css/bootstrap.min.css">
 	<link rel="stylesheet" href="/dashboard/assets/css/azzara.min.css">
 
-	<!-- CSS Just for demo purpose, don't include it in your project -->
+	<!-- CSS Just for demo purpose -->
 	<link rel="stylesheet" href="/dashboard/assets/css/demo.css">
+
+	<!-- Import CSS Front-end -->
+	<link rel="stylesheet" href="/dashboard/assets/css/tooplate-style.css">
+
 </head>
 <body>
 	<div class="wrapper">
@@ -36,6 +42,8 @@
         @include('admin.partials.custom-template')
 	</div>
 </div>
+
+
 <!--   Core JS Files   -->
 <script src="/dashboard/assets/js/core/jquery.3.2.1.min.js"></script>
 <script src="/dashboard/assets/js/core/popper.min.js"></script>
@@ -84,5 +92,10 @@
 
 <!-- Azzara DEMO methods, don't include it in your project! -->
 <script src="/dashboard/assets/js/setting-demo.js"></script>
+
+ <!-- Sweet Alert -->
+ @include('sweetalert::alert')
+ <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+ 
 </body>
 </html>

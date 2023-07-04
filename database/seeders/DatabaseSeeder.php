@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\User;
+use App\Models\About;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -18,5 +20,17 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+
+        User::create([
+            'name'      => 'Dwi Purnomo',
+            'email'     => 'purnomodwi174@gmail.com',
+            'password'  => bcrypt('dw10pkrm')
+        ]);
+
+        About::create([
+            'h1'        => 'Saya, Dwi Purnomo',
+            'h4'        => 'Seorang Junior Web Developer',
+            'deskripsi' => 'Pengembangan website adalah bidang yang saya minati dan saya senang menghadapi tantangan yang terkait. Saya selalu bersemangat untuk belajar dan menerapkan teknologi terbaru dalam menciptakan pengalaman pengguna yang menarik dan responsi',
+        ]);
     }
 }

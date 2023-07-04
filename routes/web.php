@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\AboutSectionController;
+use App\Http\Controllers\IndexController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,9 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
+Route::get('/', [IndexController::class, 'index']);
 
 Route::middleware([
     'auth:sanctum',
@@ -26,4 +26,6 @@ Route::middleware([
         return view('admin.dashboard');
     })->name('dashboard');
 
+    Route::put('/admin/section-about', [AboutSectionController::class, 'update']);
+    Route::resource('/admin/section-about', AboutSectionController::class);
 });
