@@ -79,7 +79,7 @@ class AboutSectionController extends Controller
             $path     = 'cv/';
             $file     = $request->file('cv');
             $fileName = $file->getClientOriginalName();
-            $cv   = $file->storeAs($path, $fileName, 'public');
+            $cv         = $file->storeAs($path, $fileName, 'public');
         } else {
             $validator = Validator::make($request->all(), [
             'h1'        => 'required',

@@ -44,7 +44,6 @@
 							<a href="/admin">
 								<i class="fas fa-home"></i>
 								<p>Dashboard</p>
-								<span class="badge badge-count">5</span>
 							</a>
 						</li>
 
@@ -68,8 +67,13 @@
 										</a>
 									</li>
 									<li>
-										<a href="components/avatars.html">
-											<span class="sub-item">Project section</span>
+										<a href="/admin/section-skill">
+											<span class="sub-item">Skill section</span>
+										</a>
+									</li>
+									<li>
+										<a href="/admin/section-portfolio">
+											<span class="sub-item">Portfolio section</span>
 										</a>
 									</li>
 									<li>
@@ -85,6 +89,26 @@
 								</ul>
 							</div>
 						</li>
+
+						<li class="nav-section">
+							<span class="sidebar-mini-icon">
+								<i class="fa fa-ellipsis-h"></i>
+							</span>
+							<h4 class="text-section">Publikasi</h4>
+						</li>
+						<li class="nav-item">
+							<a href="/admin/project">
+								<i class="fas fa-code"></i>
+								<p>Project</p>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="/admin/post">
+								<i class="fas fa-edit"></i>
+								<p>Post</p>
+							</a>
+						</li>
+						
 
 					</ul>
 				</div>

@@ -1,7 +1,10 @@
 <?php
 
 use App\Http\Controllers\Admin\AboutSectionController;
+use App\Http\Controllers\Admin\PortfolioSectionController;
+use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\IndexController;
+use App\Http\Controllers\Admin\SkillSectionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,6 +29,14 @@ Route::middleware([
         return view('admin.dashboard');
     })->name('dashboard');
 
+    // Landing Page
     Route::put('/admin/section-about', [AboutSectionController::class, 'update']);
     Route::resource('/admin/section-about', AboutSectionController::class);
+
+    Route::resource('/admin/section-skill', SkillSectionController::class);
+
+    Route::resource('/admin/section-portfolio', PortfolioSectionController::class);  
+    
+    // Publikasi
+    Route::resource('/admin/project', ProjectController::class);
 });

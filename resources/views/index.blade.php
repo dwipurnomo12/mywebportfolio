@@ -30,47 +30,88 @@
     </div>
 </section>
 
-<!-- PROJECTS -->
-<section class="project py-5" id="project">
-    <div class="container">
-            
-            <div class="row">
-              <div class="col-lg-11 text-center mx-auto col-12">
-
-                  <div class="col-lg-8 mx-auto mb-4">
-                    <h2>Beberapa Project Yang Pernah Saya Kerjakan</h2>
-                  </div>
-
-                  <div class="owl-carousel owl-theme">
-                    <div class="item">
-                      <div class="project-info">
-                        <img src="images/project/project-1.png" class="img-fluid" alt="project image">
-                      </div>
-                    </div>
-
-                    <div class="item">
-                      <div class="project-info">
-                        <img src="images/project/project-2.png" class="img-fluid" alt="project image">
-                      </div>
-                    </div>
-
-                    <div class="item">
-                      <div class="project-info">
-                        <img src="images/project/project-3.png" class="img-fluid" alt="project image">
-                      </div>
-                    </div>
-
-                    <div class="item">
-                      <div class="project-info">
-                        <img src="images/project/project-4.png" class="img-fluid" alt="project image">
-                      </div>
-                    </div>
-                  </div>
-
+<!-- Skills -->
+<section class="skills py-5" id="skills">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-11 text-center mx-auto col-12">
+        <div class="col-lg-12 mx-auto mb-5">
+          <h2>Skills</h2>
+          <p>Keahlian Yang Saya Miliki</p>
+          <div class="row justify-content-center my-4"> 
+            @foreach ($skills as $skill)
+              <div class="col-md-2 my-2 mx-3">
+                <img src="{{ asset('/storage' . $skill->logo) }}" alt="" width="120px"; height="120px" class="d-block mx-auto img-icon">
+                <h4>{{ $skill->skill }}</h4>
               </div>
-            </div>
+            @endforeach
+          </div>
+        </div>    
+      </div>
     </div>
+  </div>
 </section>
+
+
+<!-- PROJECTS -->
+<section id="Project" class="portfolio-mf sect-pt4 route my-5 py-4">
+  <div class="container mb-5">
+    <div class="row">
+      <div class="col-lg-12 py-4">
+        <div class="title-box text-center py-4">
+          <h2 class="title-a">
+            Portfolio
+          </h2>
+          <p class="subtitle-a mb-4">
+            Beberapa Project Yang Pernah Saya Kerjakan
+          </p>
+          <div class="line-mf"></div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-md-4 my-3">
+        <div class="work-box">
+          <div class="work-img">
+            <img src="images/project/project-1.png" alt="" class="img-fluid">
+          </div>
+          <div class="work-content">
+            <h3 class="work-title">Sistem Informasi Manajemen Aset</h3><br>
+            <a href="#" class="btn custom-btn custom-btn-bg custom-btn-link"><i class="bi bi-eye-fill"></i> View Detail</a>
+          </div>
+        
+        </div>
+      </div>
+
+      <div class="col-md-4 my-3">
+        <div class="work-box">
+            <div class="work-img">
+              <img src="images/project/project-2.png" alt="" class="img-fluid">
+            </div>
+            <div class="work-content">
+              <h3 class="work-title">Sistem Informasi Inventory Gudang</h3><br>
+              <a href="#" class="btn custom-btn custom-btn-bg custom-btn-link"><i class="bi bi-eye-fill"></i> View Detail</a>
+            </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 my-3">
+        <div class="work-box">
+            <div class="work-img">
+              <img src="images/project/project-3.png" alt="" class="img-fluid">
+            </div>
+            <div class="work-content">
+              <h3 class="work-title">Sistem Antrian Online Disdukcapil</h3><br>
+              <a href="#" class="btn custom-btn custom-btn-bg custom-btn-link"><i class="bi bi-eye-fill"></i> View Detail</a>
+            </div>
+        </div>
+      </div>
+      <a href="#contact" class="btn custom-btn custom-btn-bg custom-btn-link mx-auto mt-5">Lihat Lainnya</a>
+    </div>
+  </div>
+</section>
+<!--/ Section Portfolio End /-->
 
 <!-- FEATURES -->
 <section class="resume py-5 d-lg-flex justify-content-center align-items-center" id="resume">
