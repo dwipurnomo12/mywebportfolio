@@ -38,5 +38,8 @@ Route::middleware([
     Route::resource('/admin/section-portfolio', PortfolioSectionController::class);  
     
     // Publikasi
+    Route::get('/admin/project/checkSlug', [ProjectController::class, 'checkSlug'])->middleware('auth');
+    Route::post('/admin/project/create', [ProjectController::class, 'store']);
+    // Route::put('/admin/project/{id}', [ProjectController::class, 'update']);
     Route::resource('/admin/project', ProjectController::class);
 });

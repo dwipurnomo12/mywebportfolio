@@ -5,7 +5,7 @@
 	<div class="content">
 		<div class="page-inner">
 			<div class="page-header">
-				<h4 class="page-title">Project</h4>
+				<h4 class="page-title">Edit Project</h4>
                 <ul class="breadcrumbs">
                     <li class="nav-home">
                         <a href="/admin">
@@ -36,7 +36,8 @@
             <div id="ajax-alert" class="alert alert-success alert-dismissable" role="alert" style="display:none"></div>
             <div id="ajax-alert-error" class="alert alert-danger alert-dismissable" role="alert" style="display:none"></div>
 
-            <form action="/admin/project/create" method="POST" id="store">
+            <form action="/admin/project/{{ $project->id }}" method="POST" id="update" enctype="multipart/form-data">
+                @method('put')
                 @csrf
                 <div class="row">
                     <div class="col-lg-8">
@@ -45,17 +46,20 @@
                                 <div class="card-title">Deskripsi Project</div>
                             </div>
                             <div class="card-body">
+
+                                <input type="hidden" id="edit_id" value="{{ $project->id }}" data-id="{{ $project->id }}">
+
                                 <div class="mb-3">
                                     <label for="judul">Nama Project</label>
-                                    <input type="text" class="form-control" id="judul" name="judul">
+                                    <input type="text" class="form-control" id="edit_judul" name="judul" value="{{ $project->judul }}">
                                 </div>
                                 <div class="mb-4">
                                     <label for="slug">Slug</label>
-                                    <input type="text" class="form-control" id="slug" name="slug">
+                                    <input type="text" class="form-control" id="edit_slug" name="slug" value="{{ $project->slug }}">
                                 </div>
                                 <div class="mb-3">
                                     <label for="deskripsi">Deskripsi</label>
-                                    <textarea class="form-control" id="editor" name="deskripsi" rows="10"></textarea>
+                                    <textarea class="form-control" id="editor" name="deskripsi" rows="10">{{ $project->deskripsi }}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -69,11 +73,11 @@
                             <div class="card-body">
                                 <div class="mb-3">
                                     <label for="gambar" class="form-label">Upload Image</label><br>
-                                    <img src="" class="img-preview img-fluid mb-3 mt-2" id="preview" style="max-height: 300px; overflow:hidden; border: 1px solid black;">
-                                    <input class="form-control" type="file" id="gambar" name="gambar" onchange="previewImage()">
+                                    <img src="{{ asset('storage/'.$project->gambar) }}" class="img-preview img-fluid mb-3 mt-2" id="preview" style="max-height: 300px; overflow:hidden; border: 1px solid black;">
+                                    <input class="form-control" type="file" id="edit_gambar" name="gambar" onchange="previewImage()">
                                 </div>
                                 <div class="my-5">
-                                    <button class="btn btn-primary float-right" type="submit">Simpan</button>
+                                    <button class="btn btn-primary float-right" type="update">Simpan</button>
                                 </div>
                             </div>
                         </div>
@@ -99,16 +103,27 @@
 </script>
 
 <!-- Preview Image -->
+// Preview Image
 <script>
-    function previewImage(){
-        preview.src=URL.createObjectURL(event.target.files[0]);
+    function previewImage() {
+        var preview = document.getElementById('preview');
+        var fileInput = document.getElementById('edit_gambar');
+        var file = fileInput.files[0];
+        var reader = new FileReader();
+
+        reader.onload = function(e) {
+            preview.src = e.target.result;
+        };
+
+        reader.readAsDataURL(file);
     }
 </script>
 
+
 <!-- Eloquent Sluggable -->
 <script>
-        const judul = document.querySelector('#judul');
-        const slug  = document.querySelector('#slug');
+        const judul = document.querySelector('#edit_judul');
+        const slug  = document.querySelector('#edit_slug');
   
         judul.addEventListener('change', function(){
             fetch('/admin/project/checkSlug?judul=' + judul.value)
@@ -117,16 +132,17 @@
         });
 </script>
 
-<!-- Function Store -->
+<!-- Function Update -->
 <script>
     $(document).ready(function(){
-        $('#store').submit(function(e){
+        $('#update').submit(function(e){
             e.preventDefault();
 
-            let judul       = $('#judul').val();
-            let slug        = $('#slug').val();
+            let id          = $('#edit_id').data('id');
+            let judul       = $('#edit_judul').val();
+            let slug        = $('#edit_slug').val();
             let deskripsi   = editorInstance.getData(); 
-            let gambar      = $('#gambar')[0].files[0];
+            let gambar      = $('#edit_gambar')[0].files[0];
             let token       = $("meta[name='csrf-token']").attr("content");
 
             let formData = new FormData();
@@ -135,10 +151,11 @@
             formData.append('deskripsi', deskripsi);
             formData.append('gambar', gambar);
             formData.append('_token', token);
+            formData.append('_method', 'PUT');
 
             $.ajax({
-                url: '/admin/project/create',
-                type: "POST",
+                url: '/admin/project/' + id,
+                type: 'POST',
                 cache: false,
                 data: formData,
                 contentType: false,
@@ -149,7 +166,6 @@
                             $(this).html(response.message);
                             setTimeout(function() {
                                 $('#ajax-alert').hide();
-                                $('html, body').animate({ scrollTop: 0 }, 'slow');
                             }, 3000); 
                         });
                     }

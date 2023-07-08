@@ -41,25 +41,28 @@
                                             <th>No</th>
                                             <th>Gambar</th>
                                             <th>Project</th>
-                                            <th>Deskripsi</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @foreach ($projects as $project)
                                         <tr>
-                                            <td>1</td>
-                                            <td>Gambar</td>
-                                            <td>Project</td>
-                                            <td>Deskripsi</td>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td><img src="{{ asset('storage/' . $project->gambar) }}" alt="gambar-project" style="max-height: 225px; overflow:hidden;"></td>
+                                            <td>{{ $project->judul }}</td>
                                             <td>
-                                                <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task">
-                                                    <i class="fa fa-edit"></i>
-                                                </button>
-                                                <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove">
-                                                    <i class="fa fa-times"></i>
-                                                </button>
+                                                <a href="/admin/project/{{ $project->id }}" class="btn btn-icon btn-success mb-2">
+                                                    <i class="fas fa-eye align-items-center pt-2"></i>
+                                                </a>
+                                                <a href="/admin/project/{{ $project->id }}/edit" class="btn btn-icon btn-warning mb-2">
+                                                    <i class="fas fa-edit align-items-center pt-2"></i>
+                                                </a>
+                                                <a href="javascript:void(0)" class="btn btn-icon btn-danger mb-2" id="button_hapus" data-id="{{ $project->id }}">
+                                                    <i class="fa fa-trash align-items-center pt-2"></i>
+                                                </a>
                                             </td>
                                         </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -75,6 +78,67 @@
 <script>
     $(document).ready(function(){
         $('#table_id').DataTable();
-    })
+    });
 </script>
+
+<!-- Function Hapus -->
+<script>
+    $('body').on('click', '#button_hapus', function(){
+        let id      = $(this).data('id');
+        let token   = $("meta[name='csrf-token']").attr("content");
+
+        Swal.fire({
+            title: 'Apakah Kamu Yakin?',
+            text: "ingin menghapus data ini!",
+            icon: 'warning',
+            showCancelButton: true,
+            cancelButtonText: 'TIDAK',
+            confirmButtonText: 'YA, HAPUS!'
+        }).then((result) => {
+            if(result.isConfirmed){
+                $.ajax({
+                    url: '/admin/project/' + id,
+                    type: "DELETE",
+                    cache: false,
+                    data: {
+                        "_token": token
+                    },
+                    success:function(response){
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-right',
+                            iconColor: '#a5dc86',
+                            customClass: {
+                                popup: 'colored-toast'
+                            },
+                            showConfirmButton: false,
+                            timer: 1000,
+                            timerProgressBar: true
+                        });
+
+                        const reloadPromise = new Promise((resolve, reject) => {
+                            location.reload();
+                            resolve();
+                        });
+
+                        Toast.fire({
+                            icon: 'success',
+                            title: 'Sukses'
+                        }).then(function() {
+                            $('html, body').animate({ scrollTop: 0 }, 'slow');
+                        });
+                    },
+                    error: function(xhr, status, error) {
+                        Swal.fire({
+                            type: 'error',
+                            icon: 'error',
+                            title: 'Terjadi Kesalahan',
+                        });
+                    }
+                });
+            }
+        });
+    });
+</script>
+
 @endsection
