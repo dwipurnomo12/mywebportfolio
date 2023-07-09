@@ -71,43 +71,21 @@
     </div>
     
     <div class="row">
-      <div class="col-md-4 my-3">
-        <div class="work-box">
-          <div class="work-img">
-            <img src="images/project/project-1.png" alt="" class="img-fluid">
-          </div>
-          <div class="work-content">
-            <h3 class="work-title">Sistem Informasi Manajemen Aset</h3><br>
-            <a href="#" class="btn custom-btn custom-btn-bg custom-btn-link"><i class="bi bi-eye-fill"></i> View Detail</a>
-          </div>
-        
-        </div>
-      </div>
-
-      <div class="col-md-4 my-3">
-        <div class="work-box">
+      @foreach ($projects as $portfolio)
+        <div class="col-md-4 my-3">
+          <div class="work-box">
             <div class="work-img">
-              <img src="images/project/project-2.png" alt="" class="img-fluid">
+              <img src="{{ asset('storage/' . $portfolio->gambar) }}" alt="" class="img-fluid">
             </div>
             <div class="work-content">
-              <h3 class="work-title">Sistem Informasi Inventory Gudang</h3><br>
-              <a href="#" class="btn custom-btn custom-btn-bg custom-btn-link"><i class="bi bi-eye-fill"></i> View Detail</a>
+              <h3 class="work-title">{{ $portfolio->judul }}</h3><br>
+              <a href="detail-project/{{ $portfolio->slug }}" class="btn custom-btn custom-btn-bg custom-btn-link"><i class="bi bi-eye-fill"></i> View Detail</a>
             </div>
+          </div>
         </div>
-      </div>
+      @endforeach
 
-      <div class="col-md-4 my-3">
-        <div class="work-box">
-            <div class="work-img">
-              <img src="images/project/project-3.png" alt="" class="img-fluid">
-            </div>
-            <div class="work-content">
-              <h3 class="work-title">Sistem Antrian Online Disdukcapil</h3><br>
-              <a href="#" class="btn custom-btn custom-btn-bg custom-btn-link"><i class="bi bi-eye-fill"></i> View Detail</a>
-            </div>
-        </div>
-      </div>
-      <a href="#contact" class="btn custom-btn custom-btn-bg custom-btn-link mx-auto mt-5">Lihat Lainnya</a>
+      <a href="/projects" class="btn custom-btn custom-btn-bg custom-btn-link mx-auto mt-5">Lihat Lainnya</a>
     </div>
   </div>
 </section>

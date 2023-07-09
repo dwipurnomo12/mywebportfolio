@@ -13,6 +13,11 @@ class Project extends Model
 
     protected $guarded = ['id'];
 
+    public function getRouteKeyName()
+    {
+        return 'id';
+    }
+
     public function sluggable(): array
     {
         return [

@@ -1,7 +1,7 @@
 <!-- MENU -->
 <nav class="navbar navbar-expand-sm navbar-light">
   <div class="container">
-      <a class="navbar-brand" href="index.html"><i class='uil uil-user'></i> Marvel</a>
+      <a class="navbar-brand" href="/"><i class='uil uil-user'></i>Dwi Purnomo</a>
 
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
           aria-label="Toggle navigation">
@@ -12,6 +12,9 @@
 
       <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav mx-auto">
+              <li class="nav-item">
+                  <a href="/" class="nav-link"><span data-hover="Home">Home</span></a>
+              </li>
               <li class="nav-item">
                   <a href="#about" class="nav-link"><span data-hover="About">About</span></a>
               </li>

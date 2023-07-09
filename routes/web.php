@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\PortfolioSectionController;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\Admin\SkillSectionController;
+use App\Http\Controllers\LpProjectsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,6 +20,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [IndexController::class, 'index']);
+
+Route::get('/detail-project/{projects:slug}', [LpProjectsController::class, 'detailProject']);
+Route::get('/projects', [LpProjectsController::class, 'projects']);
+
 
 Route::middleware([
     'auth:sanctum',
@@ -40,6 +45,5 @@ Route::middleware([
     // Publikasi
     Route::get('/admin/project/checkSlug', [ProjectController::class, 'checkSlug'])->middleware('auth');
     Route::post('/admin/project/create', [ProjectController::class, 'store']);
-    // Route::put('/admin/project/{id}', [ProjectController::class, 'update']);
     Route::resource('/admin/project', ProjectController::class);
 });
