@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AboutSectionController;
 use App\Http\Controllers\Admin\PortfolioSectionController;
 use App\Http\Controllers\Admin\ProjectController;
+use App\Http\Controllers\Admin\ResumeController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\Admin\SkillSectionController;
 use App\Http\Controllers\LpProjectsController;
@@ -40,7 +41,10 @@ Route::middleware([
 
     Route::resource('/admin/section-skill', SkillSectionController::class);
 
-    Route::resource('/admin/section-portfolio', PortfolioSectionController::class);  
+    Route::POST('/admin/section-resume/pendidikan-store', [ResumeController::class, 'pendidikanStore']);
+    Route::POST('/admin/section-resume/pekerjaan-store', [ResumeController::class, 'pekerjaanStore']);
+    Route::resource('/admin/section-resume', ResumeController::class);  
+
     
     // Publikasi
     Route::get('/admin/project/checkSlug', [ProjectController::class, 'checkSlug'])->middleware('auth');

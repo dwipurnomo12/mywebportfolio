@@ -95,40 +95,38 @@
 <section class="resume py-5 d-lg-flex justify-content-center align-items-center" id="resume">
     <div class="container">
         <div class="row">
-
             <div class="col-lg-6 col-12" >
               <h2 class="mb-4 mobile-mt-2">Pendidikan</h2>
-
                 <div class="timeline">
+                  @foreach ($pendidikans as $pendidikan)
                     <div class="timeline-wrapper">
-                         <div class="timeline-yr">
-                              <span>Now</span>
-                         </div>
-                         <div class="timeline-info">
-                              <h3><span>Universitas Muhammadiyah Purworejo</span><small> - Teknologi Informasi</small></h3>
-                              <p>Saya sedang menempuh pendidikan Sarjana Program Studi Teknologi Informasi di Universitas Muhammadiyah Purworejo</p>
-                         </div>
+                        <div class="timeline-yr">
+                          <span>{{ $pendidikan->tahun }}</span>
+                        </div>
+                        <div class="timeline-info">
+                          <h3><span>{{ $pendidikan->nama_sekolah }}</span><small> - {{ $pendidikan->jurusan }}</small></h3>
+                          <p>{{ $pendidikan->deskripsi }}</p>
+                        </div> 
                     </div>
-
+                  @endforeach
                 </div>
             </div>
             <div class="col-lg-6 col-12">
                 <h2 class="mb-4">Pekerjaan</h2>
-
                   <div class="timeline">
+                    @foreach ($pekerjaans as $pekerjaan)
                       <div class="timeline-wrapper">
-                           <div class="timeline-yr">
-                                <span>Now</span>
-                           </div>
-                           <div class="timeline-info">
-                                <h3><span>Freelance</span><small>Web Developer</small></h3>
-                                <p>Saa ini saya bekerja sebagai freelance atau pekerja lepas di bidang pengembagan website (Web Development)</p>
-                           </div>
+                        <div class="timeline-yr">
+                           <span>{{ $pekerjaan->tahun }}</span>
+                        </div>
+                        <div class="timeline-info">
+                           <h3><span>{{ $pekerjaan->nama_perusahaan }}</span><small> - {{ $pekerjaan->posisi }}</small></h3>
+                           <p>{{ $pekerjaan->deskripsi }}</p>
+                        </div>
                       </div>
-
+                    @endforeach
                   </div>
               </div>
-            
         </div>
     </div>
 </section>

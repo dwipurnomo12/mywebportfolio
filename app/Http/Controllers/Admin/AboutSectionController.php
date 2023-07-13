@@ -37,7 +37,7 @@ class AboutSectionController extends Controller
             'h1.required'           => 'Wajib Diisi !',
             'h4.required'           => 'Wajib Diisi !',
             'deskripsi.required'    => 'Wajib Diisi !',
-            'gambar.mimes'           => 'Gunakan gambar format SVG !',
+            'gambar.mimes'          => 'Gunakan gambar format SVG !',
             'cv.mimes'              => 'Gunakan file berformat PDF !'
         ]);
 

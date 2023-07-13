@@ -72,17 +72,12 @@
 										</a>
 									</li>
 									<li>
-										<a href="/admin/section-portfolio">
-											<span class="sub-item">Portfolio section</span>
-										</a>
-									</li>
-									<li>
-										<a href="components/avatars.html">
+										<a href="/admin/section-resume">
 											<span class="sub-item">Resume section</span>
 										</a>
 									</li>
 									<li>
-										<a href="components/avatars.html">
+										<a href="/admin/section-contact">
 											<span class="sub-item">Contact section</span>
 										</a>
 									</li>

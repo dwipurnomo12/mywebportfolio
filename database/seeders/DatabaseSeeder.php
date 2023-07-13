@@ -6,6 +6,8 @@ namespace Database\Seeders;
 use App\Models\User;
 use App\Models\About;
 use App\Models\Skill;
+use App\Models\Pekerjaan;
+use App\Models\Pendidikan;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -29,5 +31,18 @@ class DatabaseSeeder extends Seeder
             'cv'        => 'cv/CV Dwi Purnomo.pdf'
         ]);
     
+        Pendidikan::create([
+            'nama_sekolah'  => 'Universitas Muhammadiyah Purworejo',
+            'tahun'         => 2023,
+            'jurusan'       => 'Teknologi Informasi',
+            'deskripsi'     => 'Saya sedang menempuh pendidikan Sarjana Program Studi Teknologi Informasi di Universitas Muhammadiyah Purworejo'
+        ]);
+
+        Pekerjaan::create([
+            'nama_perusahaan'   => 'Freelance',
+            'posisi'            => 'Web Developer',
+            'tahun'             => 2023,
+            'deskripsi'         => 'Saat ini saya bekerja sebagai freelance atau pekerja lepas di bidang pengembagan website (Web Development)'
+        ]);
     }
 }
