@@ -5,7 +5,7 @@
 	<div class="content">
 		<div class="page-inner">
 			<div class="page-header">
-				<h4 class="page-title">Project</h4>
+				<h4 class="page-title">Post</h4>
                 <ul class="breadcrumbs">
                     <li class="nav-home">
                         <a href="/admin">
@@ -16,22 +16,22 @@
                         <i class="flaticon-right-arrow"></i>
                     </li>
                     <li class="nav-item">
-                        <a href="/admin/project">Publikasi</a>
+                        <a href="/admin/posts">Publikasi</a>
                     </li>
                     <li class="separator">
                         <i class="flaticon-right-arrow"></i>
                     </li>
                     <li class="nav-item">
-                        <a href="/admin/project">Project</a>
+                        <a href="/admin/posts">Posts</a>
                     </li>
                 </ul>
-                <a href="project/create" class="btn btn-primary ml-auto">Tambah</a>
+                <a href="posts/create" class="btn btn-primary ml-auto">Tambah</a>
 			</div>
 			<div class="row">
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                            <div class="card-title">Semua Project</div>
+                            <div class="card-title">Semua post</div>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -39,23 +39,27 @@
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>Project</th>
+                                            <th>Judul</th>
+                                            <th>Penulis</th>
+                                            <th>Kategori</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($projects as $project)
+                                        @foreach ($posts as $post)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $project->judul }}</td>
+                                            <td>{{ $post->judul }}</td>
+                                            <td>{{ $post->user->name }}</td>
+                                            <td>{{ $post->kategori->kategori }}</td>
                                             <td>
-                                                <a href="/detail-project/{{ $project->slug }}" target="_blank" class="btn btn-icon btn-success mb-2">
+                                                <a href="/{{ $post->slug }}" target="_blank" class="btn btn-icon btn-success mb-2">
                                                     <i class="fas fa-eye align-items-center pt-2"></i>
                                                 </a>
-                                                <a href="/admin/project/{{ $project->id }}/edit" class="btn btn-icon btn-warning mb-2">
+                                                <a href="/admin/posts/{{ $post->id }}/edit" class="btn btn-icon btn-warning mb-2">
                                                     <i class="fas fa-edit align-items-center pt-2"></i>
                                                 </a>
-                                                <a href="javascript:void(0)" class="btn btn-icon btn-danger mb-2" id="button_hapus" data-id="{{ $project->id }}">
+                                                <a href="javascript:void(0)" class="btn btn-icon btn-danger mb-2" id="button_hapus" data-id="{{ $post->id }}">
                                                     <i class="fa fa-trash align-items-center pt-2"></i>
                                                 </a>
                                             </td>
@@ -79,6 +83,7 @@
     });
 </script>
 
+
 <!-- Function Hapus -->
 <script>
     $('body').on('click', '#button_hapus', function(){
@@ -95,7 +100,7 @@
         }).then((result) => {
             if(result.isConfirmed){
                 $.ajax({
-                    url: '/admin/project/' + id,
+                    url: '/admin/posts/' + id,
                     type: "DELETE",
                     cache: false,
                     data: {
@@ -138,5 +143,7 @@
         });
     });
 </script>
+
+
 
 @endsection

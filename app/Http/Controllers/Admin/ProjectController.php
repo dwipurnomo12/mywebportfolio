@@ -53,7 +53,8 @@ class ProjectController extends Controller
         {
             $path       = 'project-gambar/';
             $file       = $request->file('gambar');
-            $fileName   = $file->getClientOriginalName();
+            $extension  = $file->getClientOriginalExtension();
+            $fileName   = uniqid().'.'.$extension;
             $gambar     = $file->storeAs($path, $fileName, 'public');
         } else {
             $gambar = null;
@@ -124,7 +125,8 @@ class ProjectController extends Controller
     
             $path     = 'project-gambar/';
             $file     = $request->file('gambar');
-            $fileName = $file->getClientOriginalName();
+            $extension  = $file->getClientOriginalExtension();
+            $fileName   = uniqid().'.'.$extension;
             $gambar   = $file->storeAs($path, $fileName, 'public');
         } else {
             $validator = Validator::make($request->all(), [

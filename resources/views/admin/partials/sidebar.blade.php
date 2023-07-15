@@ -92,19 +92,45 @@
 							<h4 class="text-section">Publikasi</h4>
 						</li>
 						<li class="nav-item">
+							<a data-toggle="collapse" href="#post">
+								<i class="fas fa-edit"></i>
+								<p>Posts</p>
+								<span class="caret"></span>
+							</a>
+							<div class="collapse" id="post">
+								<ul class="nav nav-collapse">
+									<li>
+										<a href="/admin/posts">
+											<span class="sub-item">Semua Post</span>
+										</a>
+									</li>
+									<li>
+										<a href="/admin/posts/create">
+											<span class="sub-item">Tambah Baru</span>
+										</a>
+									</li>
+									<li>
+										<a href="/admin/kategori/">
+											<span class="sub-item">Kategori</span>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</li>
+
+						{{-- <li class="nav-item">
+							<a href="/admin/posts">
+								<i class="fas fa-edit"></i>
+								<p>Post</p>
+							</a>
+						</li> --}}
+						<li class="nav-item">
 							<a href="/admin/project">
 								<i class="fas fa-code"></i>
 								<p>Project</p>
 							</a>
 						</li>
-						<li class="nav-item">
-							<a href="/admin/post">
-								<i class="fas fa-edit"></i>
-								<p>Post</p>
-							</a>
-						</li>
 						
-
 					</ul>
 				</div>
 			</div>

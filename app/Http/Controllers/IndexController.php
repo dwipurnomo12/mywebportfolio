@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use App\Models\About;
 use App\Models\Skill;
 use App\Models\Project;
@@ -18,8 +19,9 @@ class IndexController extends Controller
             'abouts'        => About::all(),
             'skills'        => Skill::all(),
             'projects'      => Project::latest()->take(3)->get(),
-            'pendidikans'    => Pendidikan::all(),
-            'pekerjaans'     => Pekerjaan::all()
+            'pendidikans'   => Pendidikan::all(),
+            'pekerjaans'    => Pekerjaan::all(),
+            'posts'         => Post::all()
         ]);
     }
 }

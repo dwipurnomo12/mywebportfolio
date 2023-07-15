@@ -1,12 +1,15 @@
 <?php
 
 use App\Http\Controllers\Admin\AboutSectionController;
+use App\Http\Controllers\Admin\KategoriController;
 use App\Http\Controllers\Admin\PortfolioSectionController;
+use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\ResumeController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\Admin\SkillSectionController;
 use App\Http\Controllers\LpProjectsController;
+use App\Models\Kategori;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -47,7 +50,15 @@ Route::middleware([
 
     
     // Publikasi
-    Route::get('/admin/project/checkSlug', [ProjectController::class, 'checkSlug'])->middleware('auth');
+    Route::get('/admin/project/checkSlug', [ProjectController::class, 'checkSlug']);
     Route::post('/admin/project/create', [ProjectController::class, 'store']);
     Route::resource('/admin/project', ProjectController::class);
+
+    Route::get('/admin/posts/checkSlug', [PostController::class, 'checkSlug']);
+    Route::post('/admin/posts/create', [PostController::class, 'store']);
+    Route::resource('/admin/posts', PostController::class);
+
+    Route::get('/admin/kategori/fetchData', [KategoriController::class, 'fetchData']);
+    Route::get('/admin/kategori/checkSlug', [KategoriController::class, 'checkSlug']);
+    Route::resource('/admin/kategori', KategoriController::class);
 });

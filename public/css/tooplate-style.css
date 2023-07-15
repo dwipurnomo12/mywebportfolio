@@ -306,6 +306,16 @@ b, strong {
   background: #0d0c15;
   color: #ffffff;
 }
+.dark-mode .card {
+  background: #29292b;
+  color: #ffffff;
+}
+
+.dark-mode .card-body{
+  background: #29292b;
+  color: #ffffff;
+}
+
 .dark-mode .feature-card .uil,
 .dark-mode .navbar-light .navbar-brand,
 .dark-mode h1, .dark-mode h2, .dark-mode h3, .dark-mode h4, .dark-mode h5, .dark-mode h6, .dark-mode p,
@@ -510,6 +520,45 @@ b, strong {
 .social-links .uil:hover {
   color: #ffc200;
 }
+
+.card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  border: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card-body {
+  flex-grow: 1;
+}
+
+.card-title {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.card-text {
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.card-title a {
+  color: black;
+  text-decoration: none;
+}
+
+.card-title a:hover {
+  text-decoration: underline;
+}
+
 
 @media (min-width: 1270px) {
   .owl-theme .owl-dots {

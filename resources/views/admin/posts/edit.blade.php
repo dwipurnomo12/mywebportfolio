@@ -5,7 +5,7 @@
 	<div class="content">
 		<div class="page-inner">
 			<div class="page-header">
-				<h4 class="page-title">Edit Project</h4>
+				<h4 class="page-title">Post</h4>
                 <ul class="breadcrumbs">
                     <li class="nav-home">
                         <a href="/admin">
@@ -16,19 +16,19 @@
                         <i class="flaticon-right-arrow"></i>
                     </li>
                     <li class="nav-item">
-                        <a href="/admin/project">Publikasi</a>
+                        <a href="/admin/posts">Publikasi</a>
                     </li>
                     <li class="separator">
                         <i class="flaticon-right-arrow"></i>
                     </li>
                     <li class="nav-item">
-                        <a href="/admin/project">Project</a>
+                        <a href="/admin/posts">Post</a>
                     </li>
                     <li class="separator">
                         <i class="flaticon-right-arrow"></i>
                     </li>
                     <li class="nav-item">
-                        <a href="/admin/create">Tambah</a>
+                        <a href="/admin/posts/{{ $post->id }}/edit">Edit</a>
                     </li>
                 </ul>
 			</div>
@@ -36,30 +36,28 @@
             <div id="ajax-alert" class="alert alert-success alert-dismissable" role="alert" style="display:none"></div>
             <div id="ajax-alert-error" class="alert alert-danger alert-dismissable" role="alert" style="display:none"></div>
 
-            <form action="/admin/project/{{ $project->id }}" method="POST" id="update" enctype="multipart/form-data">
+            <form action="/admin/posts/{{ $post->id }}" method="POST" id="update" enctype="multipart/form-data">
                 @method('put')
                 @csrf
                 <div class="row">
                     <div class="col-lg-8">
                         <div class="card">
                             <div class="card-header">
-                                <div class="card-title">Deskripsi Project</div>
+                                <div class="card-title">Edit Post</div>
                             </div>
                             <div class="card-body">
-
-                                <input type="hidden" id="edit_id" value="{{ $project->id }}" data-id="{{ $project->id }}">
-
+                                <input type="hidden" id="edit_id" value="{{ $post->id }}" data-id="{{ $post->id }}">
                                 <div class="mb-3">
-                                    <label for="judul">Nama Project</label>
-                                    <input type="text" class="form-control" id="edit_judul" name="judul" value="{{ $project->judul }}">
+                                    <label for="judul">Judul Post</label>
+                                    <input type="text" class="form-control" id="judul" name="judul" value="{{ $post->judul }}">
                                 </div>
                                 <div class="mb-4">
                                     <label for="slug">Slug</label>
-                                    <input type="text" class="form-control" id="edit_slug" name="slug" value="{{ $project->slug }}">
+                                    <input type="text" class="form-control" id="slug" name="slug" value="{{ $post->slug }}">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="deskripsi">Deskripsi</label>
-                                    <textarea class="form-control" id="editor" name="deskripsi" rows="10">{{ $project->deskripsi }}</textarea>
+                                    <label for="body">Isi Post</label>
+                                    <textarea class="form-control" id="editor" name="body" rows="10">{{ $post->body }}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -70,10 +68,22 @@
                             <div class="card-header">
                                 <div class="card-title">Featured Image</div>
                             </div>
+                            <div class="form-group">
+                                <label for="kategori">Kategori</label>
+                                <select class="form-control" id="kategori_id" name="kategori_id">
+                                    @foreach ($kategoris as $kategori)
+                                        @if (old('kategori', $post->kategori) == $kategori->kategori)
+                                            <option value="{{ $kategori->id }}" selected>{{ $kategori->kategori }}</option>
+                                        @else
+                                            <option value="{{ $kategori->id }}">{{ $kategori->kategori }}</option>
+                                        @endif
+                                    @endforeach
+                                </select>
+                            </div>
                             <div class="card-body">
-                                <div class="mb-3">
+                                <div class="form-group">
                                     <label for="gambar" class="form-label">Upload Image</label><br>
-                                    <img src="{{ asset('storage/'.$project->gambar) }}" class="img-preview img-fluid mb-3 mt-2" id="preview" style="max-height: 300px; overflow:hidden; border: 1px solid black;">
+                                    <img src="{{ asset('storage/' .$post->gambar) }}" class="img-preview img-fluid mb-3 mt-2" id="preview" style="max-height: 300px; overflow:hidden; border: 1px solid black;">
                                     <input class="form-control" type="file" id="edit_gambar" name="gambar" onchange="previewImage()">
                                 </div>
                                 <div class="my-5">
@@ -104,67 +114,68 @@
 
 <!-- Preview Image -->
 <script>
-    function previewImage() {
-        var preview = document.getElementById('preview');
-        var fileInput = document.getElementById('edit_gambar');
-        var file = fileInput.files[0];
-        var reader = new FileReader();
+    function previewImage(){
+        var preview     = document.getElementById('preview');
+        var fileInput   = document.getElementById('edit_gambar');
+        var file        = fileInput.files[0];
+        var reader      = new FileReader();
 
-        reader.onload = function(e) {
+        reader.onload = function(e){
             preview.src = e.target.result;
         };
-
         reader.readAsDataURL(file);
     }
 </script>
 
-
 <!-- Eloquent Sluggable -->
 <script>
-        const judul = document.querySelector('#edit_judul');
-        const slug  = document.querySelector('#edit_slug');
+    const judul = document.querySelector('#judul');
+    const slug  = document.querySelector('#slug');
   
-        judul.addEventListener('change', function(){
-            fetch('/admin/project/checkSlug?judul=' + judul.value)
-                .then(response => response.json())
-                .then(data     => slug.value = data.slug)
-        });
+    judul.addEventListener('change', function(){
+        fetch('/admin/project/checkSlug?judul=' + judul.value)
+            .then(response => response.json())
+            .then(data     => slug.value = data.slug)
+    });
 </script>
 
-<!-- Function Update -->
+<!-- Update Function -->
 <script>
     $(document).ready(function(){
         $('#update').submit(function(e){
             e.preventDefault();
 
             let id          = $('#edit_id').data('id');
-            let judul       = $('#edit_judul').val();
-            let slug        = $('#edit_slug').val();
-            let deskripsi   = editorInstance.getData(); 
+            let judul       = $('#judul').val();
+            let slug        = $('#slug').val();
+            let body        = editorInstance.getData(); 
             let gambar      = $('#edit_gambar')[0].files[0];
+            let kategori_id = $('#kategori_id').val();
             let token       = $("meta[name='csrf-token']").attr("content");
-
+        
             let formData = new FormData();
             formData.append('judul', judul);
             formData.append('slug', slug);
-            formData.append('deskripsi', deskripsi);
+            formData.append('body', body);
             formData.append('gambar', gambar);
+            formData.append('kategori_id', kategori_id);
             formData.append('_token', token);
             formData.append('_method', 'PUT');
-
+        
             $.ajax({
-                url: '/admin/project/' + id,
-                type: 'POST',
+                url: '/admin/posts/' + id,
+                type: "POST",
                 cache: false,
                 data: formData,
                 contentType: false,
                 processData: false,
                 success: function(response){
-                    if (response.success) {
+                    if(response.success){
                         $('#ajax-alert').addClass('alert-sucess').show(function(){
                             $(this).html(response.message);
                             setTimeout(function() {
                                 $('#ajax-alert').hide();
+                                $('html, body').animate({ scrollTop: 0 }, 'slow');
                             }, 3000); 
                         });
                     }
@@ -192,5 +203,6 @@
         });
     });
 </script>
+
 
 @endsection
