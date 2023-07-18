@@ -6,6 +6,8 @@ namespace Database\Seeders;
 use App\Models\User;
 use App\Models\About;
 use App\Models\Skill;
+use App\Models\Status;
+use App\Models\Kategori;
 use App\Models\Pekerjaan;
 use App\Models\Pendidikan;
 use Illuminate\Database\Seeder;
@@ -43,6 +45,28 @@ class DatabaseSeeder extends Seeder
             'posisi'            => 'Web Developer',
             'tahun'             => 2023,
             'deskripsi'         => 'Saat ini saya bekerja sebagai freelance atau pekerja lepas di bidang pengembagan website (Web Development)'
+        ]);
+
+        Status::create([
+            'status'    => 'draft'
+        ]);
+
+        Status::create([
+            'status'    => 'publish'
+        ]);
+
+        Kategori::create([
+            'kategori'  => 'Laravel',
+            'slug'      => 'laravel',
+            'deskripsi' => 'Ini adalah deskripsi kategori Laravel',
+            'user_id'   => 1
+        ]);
+
+        Kategori::create([
+            'kategori'  => 'Wordpress',
+            'slug'      => 'wordpress',
+            'deskripsi' => 'Ini adalah deskripsi kategori Wordpress',
+            'user_id'   => 1
         ]);
     }
 }

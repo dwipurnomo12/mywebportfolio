@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AboutSectionController;
+use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\Admin\KategoriController;
 use App\Http\Controllers\Admin\PortfolioSectionController;
 use App\Http\Controllers\Admin\PostController;
@@ -8,7 +9,10 @@ use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\ResumeController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\Admin\SkillSectionController;
+use App\Http\Controllers\LpCommentController;
+use App\Http\Controllers\LpPostsController;
 use App\Http\Controllers\LpProjectsController;
+use App\Http\Controllers\NavbarPostController;
 use App\Models\Kategori;
 use Illuminate\Support\Facades\Route;
 
@@ -28,6 +32,13 @@ Route::get('/', [IndexController::class, 'index']);
 Route::get('/detail-project/{projects:slug}', [LpProjectsController::class, 'detailProject']);
 Route::get('/projects', [LpProjectsController::class, 'projects']);
 
+Route::get('/post/{posts:slug}', [LpPostsController::class, 'detailPost']);
+Route::get('/posts', [LpPostsController::class, 'posts']);
+
+Route::post('/post/{slug}', [LpCommentController::class, 'store']);
+Route::post('/post/{slug}/reply', [LpCommentController::class, 'storeReply']);
+
+Route::get('/partials/navbarpost', [NavbarPostController::class, 'index']);
 
 Route::middleware([
     'auth:sanctum',
@@ -61,4 +72,8 @@ Route::middleware([
     Route::get('/admin/kategori/fetchData', [KategoriController::class, 'fetchData']);
     Route::get('/admin/kategori/checkSlug', [KategoriController::class, 'checkSlug']);
     Route::resource('/admin/kategori', KategoriController::class);
+
+    Route::post('/admin/komentar/{id}', [CommentController::class, 'store']);
+    Route::delete('/admin/komentar/{id}/reply', [CommentController::class, 'deleteReply']);
+    Route::resource('/admin/komentar', CommentController::class);
 });

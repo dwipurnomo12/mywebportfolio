@@ -32,4 +32,15 @@ class Post extends Model
     {
         return $this->belongsTo(Kategori::class);
     }
+
+    public function status()
+    {
+        return $this->belongsTo(Status::class);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comments::class);
+    }
+    
 }

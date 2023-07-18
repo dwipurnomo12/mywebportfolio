@@ -16,13 +16,13 @@
                   <a href="/" class="nav-link"><span data-hover="Home">Home</span></a>
               </li>
               <li class="nav-item">
-                  <a href="#about" class="nav-link"><span data-hover="About">About</span></a>
-              </li>
-              <li class="nav-item">
                   <a href="#skills" class="nav-link"><span data-hover="Skills">Skills</span></a>
               </li>
               <li class="nav-item">
                   <a href="#Project" class="nav-link"><span data-hover="Projects">Projects</span></a>
+              </li>
+              <li class="nav-item">
+                  <a href="#posts" class="nav-link"><span data-hover="posts">Posts</span></a>
               </li>
               <li class="nav-item">
                   <a href="#resume" class="nav-link"><span data-hover="Resume">Resume</span></a>

@@ -86,6 +86,18 @@
                                     <img src="{{ asset('storage/' .$post->gambar) }}" class="img-preview img-fluid mb-3 mt-2" id="preview" style="max-height: 300px; overflow:hidden; border: 1px solid black;">
                                     <input class="form-control" type="file" id="edit_gambar" name="gambar" onchange="previewImage()">
                                 </div>
+                                <div class="form-group">
+                                    <label for="status">status</label>
+                                    <select class="form-control" id="status_id" name="status_id">
+                                        @foreach ($statusAll as $status)
+                                            @if (old('status', $post->status) == $status->status)
+                                                <option value="{{ $status->id }}" selected>{{ $status->status }}</option>
+                                            @else
+                                                <option value="{{ $status->id }}">{{ $status->status }}</option>
+                                            @endif
+                                        @endforeach
+                                    </select>
+                                </div>
                                 <div class="my-5">
                                     <button class="btn btn-primary float-right" type="update">Simpan</button>
                                 </div>
@@ -150,6 +162,7 @@
             let slug        = $('#slug').val();
             let body        = editorInstance.getData(); 
             let gambar      = $('#edit_gambar')[0].files[0];
+            let status_id   = $('#status_id').val();
             let kategori_id = $('#kategori_id').val();
             let token       = $("meta[name='csrf-token']").attr("content");
         
@@ -158,6 +171,7 @@
             formData.append('slug', slug);
             formData.append('body', body);
             formData.append('gambar', gambar);
+            formData.append('status_id', status_id);
             formData.append('kategori_id', kategori_id);
             formData.append('_token', token);
             formData.append('_method', 'PUT');

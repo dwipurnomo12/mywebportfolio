@@ -49,19 +49,6 @@
                                         </tr>
                                     </thead>
                                     <tbody id="kategori-table-id">
-                                        {{-- @foreach ($kategoris as $kategori)
-                                        <tr>
-                                            <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $kategori->kategori }}</td>
-                                            <td>{{ $kategori->slug }}</td>
-                                            <td>{{ $kategori->deskripsi }}</td>
-                                            <td>
-                                                <a href="javascript:void(0)" class="btn btn-icon btn-danger mb-2" id="button_hapus" data-id="{{ $kategori->id }}">
-                                                    <i class="fa fa-trash align-items-center pt-2"></i>
-                                                </a>
-                                            </td>
-                                        </tr>
-                                        @endforeach --}}
                                     </tbody>
                                 </table>
                             </div>

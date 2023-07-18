@@ -42,6 +42,7 @@
                                             <th>Judul</th>
                                             <th>Penulis</th>
                                             <th>Kategori</th>
+                                            <th>Status</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
@@ -52,6 +53,13 @@
                                             <td>{{ $post->judul }}</td>
                                             <td>{{ $post->user->name }}</td>
                                             <td>{{ $post->kategori->kategori }}</td>
+                                            <td>
+                                                @if ($post->status->status == 'draft')
+                                                    <span class="badge badge-warning">{{ $post->status->status }}</span>
+                                                @else
+                                                    <span class="badge badge-success">{{ $post->status->status }}</span>
+                                                @endif
+                                            </td>
                                             <td>
                                                 <a href="/{{ $post->slug }}" target="_blank" class="btn btn-icon btn-success mb-2">
                                                     <i class="fas fa-eye align-items-center pt-2"></i>

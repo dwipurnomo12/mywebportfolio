@@ -84,8 +84,20 @@
                                     <img src="" class="img-preview img-fluid mb-3 mt-2" id="preview" style="max-height: 300px; overflow:hidden; border: 1px solid black;">
                                     <input class="form-control" type="file" id="gambar" name="gambar" onchange="previewImage()">
                                 </div>
+                                <div class="form-group">
+                                    <label for="status" class="form-label">Status</label><br>
+                                    <select class="form-control" name="status_id" id="status_id">
+                                        @foreach ($statusAll as $status)
+                                            @if (old('status_id') == $status->id)
+                                                <option value="{{ $status->id }}" selected>{{ $status->status }}</option>
+                                            @else
+                                                <option value="{{ $status->id }}">{{ $status->status }}</option>
+                                            @endif
+                                        @endforeach
+                                    </select>
+                                </div>
                                 <div class="my-5">
-                                    <button class="btn btn-primary float-right" type="submit">Simpan</button>
+                                    <button class="btn btn-primary float-right mx-2" type="submit">Simpan</button>
                                 </div>
                             </div>
                         </div>
@@ -140,6 +152,7 @@
             let body        = editorInstance.getData(); 
             let gambar      = $('#gambar')[0].files[0];
             let kategori_id = $('#kategori_id').val();
+            let status      = $('#status_id').val();
             let token       = $("meta[name='csrf-token']").attr("content");
         
             let formData = new FormData();
@@ -148,6 +161,7 @@
             formData.append('body', body);
             formData.append('gambar', gambar);
             formData.append('kategori_id', kategori_id);
+            formData.append('status_id', status);
             formData.append('_token', token);
         
             $.ajax({
@@ -191,6 +205,5 @@
         });
     });
 </script>
-
 
 @endsection

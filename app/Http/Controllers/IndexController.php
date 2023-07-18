@@ -21,7 +21,7 @@ class IndexController extends Controller
             'projects'      => Project::latest()->take(3)->get(),
             'pendidikans'   => Pendidikan::all(),
             'pekerjaans'    => Pekerjaan::all(),
-            'posts'         => Post::all()
+            'posts'         => Post::where('status_id', 2)->orderBy('id', 'DESC')->get()
         ]);
     }
 }

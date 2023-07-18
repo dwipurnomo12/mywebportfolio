@@ -118,16 +118,33 @@
 							</div>
 						</li>
 
-						{{-- <li class="nav-item">
-							<a href="/admin/posts">
-								<i class="fas fa-edit"></i>
-								<p>Post</p>
-							</a>
-						</li> --}}
 						<li class="nav-item">
-							<a href="/admin/project">
+							<a data-toggle="collapse" href="#project">
 								<i class="fas fa-code"></i>
-								<p>Project</p>
+								<p>projects</p>
+								<span class="caret"></span>
+							</a>
+							<div class="collapse" id="project">
+								<ul class="nav nav-collapse">
+									<li>
+										<a href="/admin/project">
+											<span class="sub-item">Semua project</span>
+										</a>
+									</li>
+									<li>
+										<a href="/admin/project/create">
+											<span class="sub-item">Tambah Baru</span>
+										</a>
+									</li>
+	
+								</ul>
+							</div>
+						</li>
+
+						<li class="nav-item">
+							<a href="/admin/komentar">
+								<i class="fas fa-comments"></i>
+								<p>Komentar</p>
 							</a>
 						</li>
 						

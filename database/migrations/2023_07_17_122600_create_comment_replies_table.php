@@ -11,18 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('posts', function (Blueprint $table) {
+        Schema::create('comment_replies', function (Blueprint $table) {
             $table->id();
-            $table->string('gambar');
-            $table->string('judul');
-            $table->string('slug')->unique();
-            $table->text('excerpt');
+            $table->string('nama');
+            $table->string('email');
             $table->text('body');
-            $table->unsignedBigInteger('views')->default(0);
-            $table->foreignId('user_id');
-            $table->foreignId('kategori_id');
-            $table->foreignId('status_id');
+            $table->unsignedBigInteger('comment_id');
             $table->timestamps();
+            $table->foreignId('user_id')->nullable();
+            $table->foreign('comment_id')->references('id')->on('comments')->onDelete('cascade');
         });
     }
 
@@ -31,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('posts');
+        Schema::dropIfExists('comment_replies');
     }
 };

@@ -62,7 +62,7 @@ class KategoriController extends Controller
             'kategori'      =>  $request->kategori,
             'slug'          =>  $request->slug,
             'deskripsi'     =>  $request->deskripsi,
-            'user_id'       => auth()->user()->id
+            'user_id'       =>  auth()->user()->id
         ]);
 
         return response()->json([

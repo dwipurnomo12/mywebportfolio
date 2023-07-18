@@ -28,7 +28,7 @@
                         <i class="flaticon-right-arrow"></i>
                     </li>
                     <li class="nav-item">
-                        <a href="/admin/create">Tambah</a>
+                        <a href="/admin/project/create">Tambah</a>
                     </li>
                 </ul>
 			</div>

@@ -22,7 +22,12 @@
   </head>
   <body>
 
-    @include('partials.navbar')
+    @if(Request::is('/'))
+      @include('partials.navbar')
+    @else
+        @include('partials.navbarpost')
+    @endif
+
     
     @yield('container')
 
@@ -37,5 +42,6 @@
     <script src="/js/smoothscroll.js"></script>
     <script src="/js/custom.js"></script>
 
+    <script src="/js/share.js"></script>
   </body>
 </html>

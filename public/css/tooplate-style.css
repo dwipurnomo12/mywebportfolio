@@ -316,6 +316,22 @@ b, strong {
   color: #ffffff;
 }
 
+.dark-mode .social-button{
+  background: #29292b;
+  color: #ffffff;
+}
+
+.dark-mode .form-control{
+  background: #000000;
+  color: #ffffff;
+}
+
+.dark-mode .form-label{
+  background: #000000;
+  color: #ffffff;
+}
+
+
 .dark-mode .feature-card .uil,
 .dark-mode .navbar-light .navbar-brand,
 .dark-mode h1, .dark-mode h2, .dark-mode h3, .dark-mode h4, .dark-mode h5, .dark-mode h6, .dark-mode p,
@@ -557,6 +573,41 @@ b, strong {
 
 .card-title a:hover {
   text-decoration: underline;
+}
+
+#social-links ul{
+  padding-left: 0;
+}
+#social-links ul li {
+  display: inline-block;
+} 
+#social-links ul li a {
+  padding: 6px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin: 1px;
+  font-size: 25px;
+}
+#social-links .fa-facebook{
+   color: #0d6efd;
+}
+#social-links .fa-twitter{
+   color: deepskyblue;
+}
+#social-links .fa-linkedin{
+   color: #0e76a8;
+}
+#social-links .fa-whatsapp{
+  color: #25D366
+}
+#social-links .fa-reddit{
+  color: #FF4500;;
+}
+#social-links .fa-telegram{
+  color: #0088cc;
+}
+.social-button{
+ color: inherit;
 }
 
 
