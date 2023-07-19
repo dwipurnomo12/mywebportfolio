@@ -7,10 +7,10 @@
         <div class="col-lg-12 py-4">
           <div class="title-box text-center py-4">
             <h2 class="title-a">
-              Posts
+              {{ $kategori }}
             </h2>
             <p class="subtitle-a mb-4">
-              Baca Blog Saya
+              {{ $deskripsi }}
             </p>
             <div class="line-mf"></div>
           </div>

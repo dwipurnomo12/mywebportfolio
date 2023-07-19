@@ -15,10 +15,12 @@
                 <li class="nav-item">
                     <a href="/" class="nav-link"><span data-hover="Home">Home</span></a>
                 </li>
-
+                <li class="nav-item">
+                    <a href="/posts" class="nav-link"><span data-hover="Home">All Posts</span></a>
+                </li>
                 @foreach ($kategoris as $kategori)
                     <li class="nav-item">
-                        <a href="{{ $kategori->slug }}" class="nav-link"><span data-hover="{{ $kategori->slug }}">{{ $kategori->kategori }}</span></a>
+                        <a href="/kategori/{{ $kategori->slug }}" class="nav-link"><span data-hover="{{ $kategori->slug }}">{{ $kategori->kategori }}</span></a>
                     </li>
                 @endforeach
             </ul>

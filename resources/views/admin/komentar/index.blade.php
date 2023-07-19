@@ -80,12 +80,11 @@
                                                             </form>
                                                         </div>
                                                         <hr>
-                                                        @endforeach
-                                                    
+                                                        @endforeach                                                    
                                                     </div>
                                                 @else
-                                                    <div id="replies{{ $comment->id }}" style="display: none;">
-                                                        <p style="text-align: center">Tidak Balasan</p>
+                                                    <div id="replies{{ $comment->id }}" class="mt-2" style="display: none; ">
+                                                        <p style="text-align: center">Tidak Ada Balasan</p>
                                                     </div>
                                                 @endif
 
@@ -261,7 +260,7 @@
 
                             setTimeout(function() {
                                 location.reload();
-                            }, 1500); // Delay reload selama 1500 ms (1.5 detik)
+                            }, 1500); 
                         },
                         error: function (xhr, status, error) {
                             var response = JSON.parse(xhr.responseText);

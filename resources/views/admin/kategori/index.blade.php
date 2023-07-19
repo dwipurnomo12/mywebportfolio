@@ -249,21 +249,20 @@
                                 popup: 'colored-toast'
                             },
                             showConfirmButton: false,
-                            timer: 1000,
+                            timer: 1500,
                             timerProgressBar: true
-                        });
-
-                        const reloadPromise = new Promise((resolve, reject) => {
-                            location.reload();
-                            resolve();
                         });
 
                         Toast.fire({
                             icon: 'success',
-                            title: 'Sukses'
+                            title: 'Berhasil Menghapus Kategori'
                         }).then(function() {
                             $('html, body').animate({ scrollTop: 0 }, 'slow');
                         });
+
+                        setTimeout(function() {
+                            location.reload();
+                        }, 1500);
                     },
                     error: function(xhr, status, error) {
                         Swal.fire({

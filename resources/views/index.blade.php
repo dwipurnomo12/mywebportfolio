@@ -85,7 +85,9 @@
         </div>
       @endforeach
 
-      <a href="/projects" class="btn custom-btn custom-btn-bg custom-btn-link mx-auto mt-5">Lihat Lainnya</a>
+      <div class="col-lg-12 text-center">
+        <a href="/projects" class="btn custom-btn custom-btn-bg custom-btn-link mx-auto mt-5">Lihat Lainnya</a>
+      </div>
     </div>
   </div>
 </section>
@@ -163,7 +165,9 @@
           </div>
       </div>
       @endforeach
-      <a href="/posts" class="btn custom-btn custom-btn-bg custom-btn-link mx-auto mt-5">Lihat Lainnya</a>
+      <div class="col-lg-12 text-center"> 
+        <a href="/posts" class="btn custom-btn custom-btn-bg custom-btn-link mx-auto mt-5">Lihat Lainnya</a>
+      </div>
     </div>
   </div>
 </section>
@@ -176,14 +180,14 @@
       
       <div class="col-lg-5 mr-lg-5 col-12">
         <div class="google-map w-100">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d480.0667962022264!2d110.01783319529528!3d-7.7823405883458525!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sid!4v1688263101722!5m2!1sen!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <iframe src={{ $contact->maps }}></iframe>
         </div>
 
         <div class="contact-info d-flex justify-content-between align-items-center py-4 px-lg-5">
             <div class="contact-info-item text-white">
-                <a href="https://www.linkedin.com/in/dwi-purnomo-094119268/" class="bi bi-linkedin" data-toggle="tooltip">&nbsp; dwi-purnomo-094119268</a><br>
-                <a href="https://wa.me/+6281229248179" class="bi bi-whatsapp" data-toggle="tooltip">&nbsp; 0812-2924-8179</a><br>
-                <a href="https://github.com/dwipurnomo12" class="bi bi-github" data-toggle="tooltip">&nbsp; Dwipurnomo12</a>
+                <a href="{{ $contact->linkedIn }}" class="bi bi-linkedin" data-toggle="tooltip">&nbsp; {{ $contact->linkedIn }}</a><br>
+                <a href="{{ $contact->whatsapp }}" class="bi bi-whatsapp" data-toggle="tooltip">&nbsp; {{ $contact->whatsapp }}</a><br>
+                <a href="{{ $contact->github }}" class="bi bi-github" data-toggle="tooltip">&nbsp; {{ $contact->github }}2</a>
             </div>
         </div>
       </div>
@@ -195,7 +199,7 @@
           <form action="" method="get">
             <div class="row">
               <div class="col-lg-6 col-12">
-                <input type="text" class="form-control" name="name" placeholder="Your Name" id="name">
+                <input type="text" class="form-control" name="name" placeholder="Nama Anda" id="name">
               </div>
 
               <div class="col-lg-6 col-12">
@@ -203,11 +207,11 @@
               </div>
 
               <div class="col-12">
-                <textarea name="message" rows="6" class="form-control" id="message" placeholder="Message"></textarea>
+                <textarea name="message" rows="6" class="form-control" id="message" placeholder="Pesan"></textarea>
               </div>
 
               <div class="ml-lg-auto col-lg-5 col-12">
-                <input type="submit" class="form-control submit-btn" value="Send Button">
+                <input type="submit" class="form-control submit-btn" value="Kirim">
               </div>
             </div>
           </form>

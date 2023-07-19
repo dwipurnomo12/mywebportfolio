@@ -152,10 +152,6 @@
 
         <!-- Sidebar -->
         <div class="col-lg-4 py-4">
-            <div class="input-group mb-4">
-                <input type="text" class="form-control bg-transparent" placeholder="Cari artikel..." name="query">
-                <button class="btn btn-transparent" type="submit" style="border: 1px solid rgb(170, 170, 170)"><i class="bi bi-search"></i></button>
-            </div>
             <div class="populer-post mb-5">
                 <h5>Populer post</h5>
                 @foreach ($populerPost as $post)
@@ -176,7 +172,7 @@
                     <div class="col">
                         @foreach ($kategoris as $kategori)
                         <ul>
-                            <li><p><i class="bi bi-hash"></i> <a href="/kategories" style="color: inherit;">{{ $kategori->kategori }}</a></p></li>
+                            <li><p><i class="bi bi-hash"></i> <a href="/kategori/{{ $kategori->kategori }}" style="color: inherit;">{{ $kategori->kategori }}</a></p></li>
                         </ul>
                         @endforeach
                     </div>

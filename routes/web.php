@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AboutSectionController;
 use App\Http\Controllers\Admin\CommentController;
+use App\Http\Controllers\Admin\ContactSectionController;
 use App\Http\Controllers\Admin\KategoriController;
 use App\Http\Controllers\Admin\PortfolioSectionController;
 use App\Http\Controllers\Admin\PostController;
@@ -10,6 +11,7 @@ use App\Http\Controllers\Admin\ResumeController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\Admin\SkillSectionController;
 use App\Http\Controllers\LpCommentController;
+use App\Http\Controllers\LpKategoriController;
 use App\Http\Controllers\LpPostsController;
 use App\Http\Controllers\LpProjectsController;
 use App\Http\Controllers\NavbarPostController;
@@ -40,6 +42,8 @@ Route::post('/post/{slug}/reply', [LpCommentController::class, 'storeReply']);
 
 Route::get('/partials/navbarpost', [NavbarPostController::class, 'index']);
 
+Route::get('/kategori/{kategori:slug}', [LpKategoriController::class, 'index']);
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
@@ -59,6 +63,7 @@ Route::middleware([
     Route::POST('/admin/section-resume/pekerjaan-store', [ResumeController::class, 'pekerjaanStore']);
     Route::resource('/admin/section-resume', ResumeController::class);  
 
+    Route::get('/admin/section-contact/', [ContactSectionController::class, 'index']);
     
     // Publikasi
     Route::get('/admin/project/checkSlug', [ProjectController::class, 'checkSlug']);
