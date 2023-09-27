@@ -115,7 +115,12 @@
 <script>
     let editorInstance;
     ClassicEditor
-        .create( document.querySelector( '#editor' ) )
+        .create( document.querySelector( '#editor' ), {
+            ckfinder: {
+                uploadUrl: '{{ route('upload.image').'?_token='.csrf_token() }}', 
+                filebrowserUploadMethod: 'form'
+            }
+        })
         .then( editor => {
              editorInstance =editor;
         } )

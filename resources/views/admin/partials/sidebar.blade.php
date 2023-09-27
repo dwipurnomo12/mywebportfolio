@@ -21,18 +21,11 @@
 							<div class="collapse in" id="collapseExample">
 								<ul class="nav">
 									<li>
-										<a href="#profile">
-											<span class="link-collapse">My Profile</span>
+										<a href="/admin/profile">
+											<span class="link-collapse">Profile</span>
 										</a>
-									</li>
-									<li>
-										<a href="#edit">
-											<span class="link-collapse">Edit Profile</span>
-										</a>
-									</li>
-									<li>
-										<a href="#settings">
-											<span class="link-collapse">Settings</span>
+										<a href="/admin/update-password">
+											<span class="link-collapse">Password</span>
 										</a>
 									</li>
 								</ul>
@@ -136,9 +129,15 @@
 											<span class="sub-item">Tambah Baru</span>
 										</a>
 									</li>
-	
 								</ul>
 							</div>
+						</li>
+
+						<li class="nav-item">
+							<a href="/admin/media">
+								<i class="fas fa-image"></i>
+								<p>Media</p>
+							</a>
 						</li>
 
 						<li class="nav-item">

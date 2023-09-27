@@ -575,6 +575,11 @@ b, strong {
   text-decoration: underline;
 }
 
+img {
+  max-width: 100%;
+  height: auto !important;
+}
+
 #social-links ul{
   padding-left: 0;
 }

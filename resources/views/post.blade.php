@@ -33,12 +33,6 @@
             <hr class="line my-5">
 
             <h5 class="mb-4">Komentar :</h5>
-            @if(session()->has('success'))
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                {{ session('success') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            @endif
 
             <div class="container mb-5">
                 @foreach ($comments as $comment)
@@ -74,13 +68,6 @@
             
                         <!-- Comment Reply -->
                         <div id="replyForm{{ $comment->id }}" style="display: none;">
-                            @if(session()->has('success'))
-                                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                {{ session('success') }}
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                </div>
-                            @endif
-
                             <h6>Balas Komentar :</h6>
                             <form action="/post/{{ $post->slug }}/reply" method="POST">
                                 @csrf

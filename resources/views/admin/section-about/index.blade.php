@@ -98,7 +98,7 @@
                                     <input type="file" class="form-control-file" id="cv" name="cv" data-default-value="{{ $about->cv }}" onchange="updateFileName()">
                                 </div>
 
-                                <button type="submit" class="btn btn-primary my-4 float-right">Simpan</button>
+                                <button type="submit" class="btn btn-primary my-4 float-right is-loading:none">Simpan</button>
                             </form>
                         </div>
                     </div>
@@ -145,6 +145,9 @@
             var method      = form.attr('method');
             var formData    = new FormData(form[0]);
 
+            var submitButton = form.find('button[type="submit"]');
+            submitButton.addClass('is-loading');
+
             $.ajax({
                 url: url,
                 type: method,
@@ -153,6 +156,7 @@
                 contentType: false,
                 success: function (response) {
                     if (response.success) {
+                        submitButton.removeClass('is-loading');
                         var preview  = document.getElementById('gambar-preview');
                         preview.src  = response.image_url;
                         console.log(response.image_url);
@@ -171,13 +175,14 @@
 
                         Toast.fire({
                             icon: 'success',
-                            title: 'Sukses'
+                            title: 'Berhasil Mengupdate Data'
                         }).then(function() {
                             $('html, body').animate({ scrollTop: 0 }, 'slow');
                         });
                     }
                 },
                 error: function (xhr, status, error) {
+                    submitButton.removeClass('is-loading');
                     var errorMessage = JSON.parse(xhr.responseText);
 
                     const Toast = Swal.mixin({
@@ -192,14 +197,15 @@
                         timerProgressBar: true
                     });
 
-                    // Mengambil nilai pesan error dari objek errorMessage
                     var errorMessages = Object.values(errorMessage);
-                    var message = errorMessages[0]; // Mengambil pesan pertama dari daftar errorMessages
-
+                    var message = errorMessages[0]; 
                     Toast.fire({
                         icon: 'error',
                         title: message
                     });
+                },
+                complete: function(){
+                    submitButton.removeClass('is-loading');
                 }
             });
         });

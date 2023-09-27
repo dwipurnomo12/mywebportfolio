@@ -43,5 +43,9 @@
     <script src="/js/custom.js"></script>
 
     <script src="/js/share.js"></script>
+
+      <!-- Sweet Alert -->
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+      @include('sweetalert::alert')
   </body>
 </html>

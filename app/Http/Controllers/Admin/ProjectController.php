@@ -78,6 +78,22 @@ class ProjectController extends Controller
         ]);
     }
 
+    public function imageBody(Request $request)
+    {
+        if ($request->hasFile('upload') && $request->file('upload')->isValid()) {
+            $path = 'project-gambar/';
+            $file = $request->file('upload');
+            $extension = $file->getClientOriginalExtension();
+            $fileName = uniqid().'.'.$extension;
+            $gambar = $file->storeAs($path, $fileName, 'public');
+
+            $url = Storage::url($gambar);
+            return response()->json(['fileName' => $fileName, 'uploaded'=> 1, 'url' => $url]);
+        } else {
+            return response()->json(['error' => 'Gagal mengunggah gambar.']);
+        }
+    }
+
     /**
      * Display the specified resource.
      */
@@ -168,7 +184,11 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
-        unlink('.'.Storage::url($project->gambar));
+        $gambarPath = public_path(Storage::url($project->gambar));
+        if(file_exists($gambarPath)){
+            unlink($gambarPath);
+        }
+   
         $project->delete();
 
         return response()->json([
@@ -177,6 +197,9 @@ class ProjectController extends Controller
         ]);  
     }
 
+   /**
+     * Check Slug 
+     */
     public function checkSlug(Request $request)
     {
         $slug = SlugService::createSlug(Project::class, 'slug', $request->judul);

@@ -27,7 +27,9 @@ class LpCommentController extends Controller
         $validatedData['post_id'] = $post->id;
 
         Comments::create($validatedData);
-        return redirect()->back()->with('success', 'Komentar berhasil dikirim');
+        
+        alert()->toast('Komentar berhasil dikirimkan', 'success');
+        return redirect()->back();
     }
 
     public function storeReply(Request $request)
@@ -54,6 +56,7 @@ class LpCommentController extends Controller
         
         $commentReply->save();
 
-        return redirect()->back()->with('success', 'Balasan komentar berhasil dikirim');
+        alert()->toast('Komentar balasan berhasil dikirimkan', 'success');
+        return redirect()->back();
     }
 }

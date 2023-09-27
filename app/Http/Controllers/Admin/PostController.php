@@ -8,6 +8,7 @@ use App\Models\Project;
 use App\Models\Kategori;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -96,6 +97,36 @@ class PostController extends Controller
             'data'      => $post
         ]);
     }
+
+    public function imageBody(Request $request)
+    {
+        if ($request->hasFile('upload') && $request->file('upload')->isValid()) {
+            $path = 'post-gambar/';
+            $file = $request->file('upload');
+            $extension = $file->getClientOriginalExtension();
+            $fileName = uniqid().'.'.$extension;
+            $gambar = $file->storeAs($path, $fileName, 'public');
+
+            $url = Storage::url($gambar);
+            return response()->json(['fileName' => $fileName, 'uploaded'=> 1, 'url' => $url]);
+        } else {
+            return response()->json(['error' => 'Gagal mengunggah gambar.']);
+        }
+    }
+
+    public function deleteImage(Request $request)
+    {
+        $imageUrl = $request->input('imageUrl');
+        if ($imageUrl) {
+            // Mendapatkan nama file dari URL gambar
+            $path = parse_url($imageUrl, PHP_URL_PATH);
+            $fileName = basename($path);
+            $path = 'post-gambar/';
+            Storage::disk('public')->delete($path . $fileName);
+        }
+        return response()->json(['deleted' => true]);
+    }
+    
 
     /**
      * Display the specified resource.
@@ -197,7 +228,11 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        unlink('.'.Storage::url($post->gambar));
+        $gambarPath = public_path(Storage::url($post->gambar));
+        if(file_exists($gambarPath)){
+            unlink($gambarPath);
+        }
+
         $post->delete();
 
         return response()->json([

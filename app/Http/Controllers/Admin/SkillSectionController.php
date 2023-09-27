@@ -6,6 +6,7 @@ use App\Models\Skill;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class SkillSectionController extends Controller
 {
@@ -33,45 +34,33 @@ class SkillSectionController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'skill' => 'required|string|max:255',
+            'logo'  => 'required|image|mimes:svg|max:2048',
+        ], [
+            'skill.required'    => 'Tambahkan Nama Skill',
+            'logo.required'     => 'Wajib Tambahkan Logo'
+        ]);
+    
+        if($validator->fails()){
+            return response()->json($validator->errors(), 422);
+        }
+    
         $skill = $request->input('skill');
         $logo = $request->file('logo');
-
-        $path       = '/skill-logo';
-        $fileName   = $logo->getClientOriginalName();
+    
+        $path = '/skill-logo';
+        $fileName = $logo->getClientOriginalName();
         $logo->storeAs($path, $fileName, 'public');
-
+    
         $newSkill = new Skill();
         $newSkill->skill = $skill;
-        $newSkill->logo  = $path . '/' . $fileName;
+        $newSkill->logo = $path . '/' . $fileName;
         $newSkill->save();
-
+    
         return response()->json([
-            'logo'  => asset(('storage' . $newSkill->logo))
+            'logo' => asset(('storage' . $newSkill->logo))
         ]);
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
     }
 
     /**

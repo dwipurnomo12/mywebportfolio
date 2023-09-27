@@ -1,6 +1,7 @@
 @extends('admin.layouts.main')
 
 @section('container')
+
 <div class="main-panel">
 	<div class="content">
 		<div class="page-inner">
@@ -26,7 +27,7 @@
                     </li>
                 </ul>
 			</div>
-            <div id="alert-success"></div>
+         
 			<div class="row">
                 <div class="col-lg-8">
                     <div class="card">
@@ -57,10 +58,31 @@
 				<div class="col-lg-4">
                     <div class="card">
                         <div class="card-header">
-                            <div class="card-title">Edit Section About</div>
+                            <div class="card-title">Edit Section Contact</div>
                         </div>
                         <div class="card-body">
-                            
+                            <form action="/admin/section-contact/{{ $contact->id }}" method="POST" id="section-contact-form">
+                                @method('put')
+                                @csrf
+
+                                <div class="form-group">
+                                    <label for="maps_link">Google Maps Locations</label>
+                                    <input type="text" class="form-control" id="maps_link" name="maps_link" value="{{ $contact->maps_link }}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="linkedIn_link">linkedIn</label>
+                                    <input type="text" class="form-control" id="linkedIn_link" name="linkedIn_link" value="{{ $contact->linkedIn_link }}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="whatsapp_link">Whatsapp</label>
+                                    <input type="text" class="form-control" id="whatsapp_link" name="whatsapp_link" value="{{ $contact->whatsapp_link }}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="github_link">Whatsapp</label>
+                                    <input type="text" class="form-control" id="github_link" name="github_link" value="{{ $contact->github_link }}">
+                                </div>
+                                <button type="submit" class="btn btn-primary my-4 float-right is-loading:none">Simpan</button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -70,12 +92,10 @@
 	</div>
 </div>
 
-
-
-<!-- Update Data -->
+<!-- Update Section Contact -->
 <script>
     $(document).ready(function(){
-        $('#section-about-form').on('submit', function(e){
+        $('#section-contact-form').on('submit', function(e){
             e.preventDefault();
 
             var form        = $(this);
@@ -83,18 +103,18 @@
             var method      = form.attr('method');
             var formData    = new FormData(form[0]);
 
+            var submitButton = form.find('button[type="submit"]');
+            submitButton.addClass('is-loading');
+
             $.ajax({
                 url: url,
                 type: method,
                 data: formData,
                 processData: false,
                 contentType: false,
-                success: function (response) {
-                    if (response.success) {
-                        var preview  = document.getElementById('gambar-preview');
-                        preview.src  = response.image_url;
-                        console.log(response.image_url);
-
+                success: function(response){
+                    if(response.success){
+                        submitButton.removeClass('is-loading');
                         const Toast = Swal.mixin({
                             toast: true,
                             position: 'top-right',
@@ -109,40 +129,41 @@
 
                         Toast.fire({
                             icon: 'success',
-                            title: 'Sukses'
+                            title: 'Berhasil Mengupdate Data'
                         }).then(function() {
                             $('html, body').animate({ scrollTop: 0 }, 'slow');
                         });
                     }
                 },
                 error: function (xhr, status, error) {
-                    var errorMessage = JSON.parse(xhr.responseText);
+                        submitButton.removeClass('is-loading');
+                        var errorMessage = JSON.parse(xhr.responseText);
 
-                    const Toast = Swal.mixin({
-                        toast: true,
-                        position: 'top-right',
-                        iconColor: '#dc3545',
-                        customClass: {
-                            popup: 'colored-toast'
-                        },
-                        showConfirmButton: false,
-                        timer: 2000,
-                        timerProgressBar: true
-                    });
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-right',
+                            iconColor: '#dc3545',
+                            customClass: {
+                                popup: 'colored-toast'
+                            },
+                            showConfirmButton: false,
+                            timer: 2000,
+                            timerProgressBar: true
+                        });
 
-                    // Mengambil nilai pesan error dari objek errorMessage
-                    var errorMessages = Object.values(errorMessage);
-                    var message = errorMessages[0]; // Mengambil pesan pertama dari daftar errorMessages
-
-                    Toast.fire({
-                        icon: 'error',
-                        title: message
-                    });
-                }
+                        var errorMessages = Object.values(errorMessage);
+                        var message = errorMessages[0]; 
+                        Toast.fire({
+                            icon: 'error',
+                            title: message
+                        });
+                    },
+                    complete: function(){
+                        submitButton.removeClass('is-loading');
+                    }
             });
         });
     });
 </script>
-
 
 @endsection

@@ -180,14 +180,14 @@
       
       <div class="col-lg-5 mr-lg-5 col-12">
         <div class="google-map w-100">
-            <iframe src={{ $contact->maps }}></iframe>
+            <iframe src={{ $contact->maps_link }}></iframe>
         </div>
 
         <div class="contact-info d-flex justify-content-between align-items-center py-4 px-lg-5">
             <div class="contact-info-item text-white">
-                <a href="{{ $contact->linkedIn }}" class="bi bi-linkedin" data-toggle="tooltip">&nbsp; {{ $contact->linkedIn }}</a><br>
-                <a href="{{ $contact->whatsapp }}" class="bi bi-whatsapp" data-toggle="tooltip">&nbsp; {{ $contact->whatsapp }}</a><br>
-                <a href="{{ $contact->github }}" class="bi bi-github" data-toggle="tooltip">&nbsp; {{ $contact->github }}2</a>
+                <a href="{{ $contact->linkedIn_link }}" target="_blank" class="bi bi-linkedin" data-toggle="tooltip">&nbsp; {{ $contact->linkedIn }}</a><br>
+                <a href="{{ $contact->whatsapp_link }}" target="_blank" class="bi bi-whatsapp" data-toggle="tooltip">&nbsp; {{ $contact->whatsapp }}</a><br>
+                <a href="{{ $contact->github_link }}" target="_blank" class="bi bi-github" data-toggle="tooltip">&nbsp; {{ $contact->github }}</a>
             </div>
         </div>
       </div>
@@ -195,19 +195,40 @@
       <div class="col-lg-6 col-12">
         <div class="contact-form">
           <h2 class="mb-4">Tertarik untuk bekerja sama ? Hubungi saya : </h2>
+          @if (session('success'))
+            <div class="alert alert-success" role="alert">
+              {{ __('A fresh mail has been sent to your email address.') }}
+          </div>
+          @endif
 
-          <form action="" method="get">
+          <form action="/" method="POST">
+            @csrf
             <div class="row">
               <div class="col-lg-6 col-12">
-                <input type="text" class="form-control" name="name" placeholder="Nama Anda" id="name">
+                <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" placeholder="Nama Anda" id="name">
+                @error('name')
+                  <div class="invalid-feedback">
+                      {{ $message }}
+                  </div>
+                @enderror
               </div>
 
               <div class="col-lg-6 col-12">
-                <input type="email" class="form-control" name="email" placeholder="Email" id="email">
+                <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" placeholder="Email" id="email">
+                @error('email')
+                  <div class="invalid-feedback">
+                      {{ $message }}
+                  </div>
+                @enderror
               </div>
 
               <div class="col-12">
-                <textarea name="message" rows="6" class="form-control" id="message" placeholder="Pesan"></textarea>
+                <textarea name="body" rows="6" class="form-control @error('body') is-invalid @enderror" id="body" name="body" placeholder="Pesan"></textarea>
+                @error('body')
+                  <div class="invalid-feedback">
+                      {{ $message }}
+                  </div>
+                @enderror
               </div>
 
               <div class="ml-lg-auto col-lg-5 col-12">
@@ -215,6 +236,7 @@
               </div>
             </div>
           </form>
+
         </div>
       </div>
 

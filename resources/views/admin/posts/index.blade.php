@@ -61,7 +61,7 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                <a href="/{{ $post->slug }}" target="_blank" class="btn btn-icon btn-success mb-2">
+                                                <a href="/post/{{ $post->slug }}" target="_blank" class="btn btn-icon btn-success mb-2">
                                                     <i class="fas fa-eye align-items-center pt-2"></i>
                                                 </a>
                                                 <a href="/admin/posts/{{ $post->id }}/edit" class="btn btn-icon btn-warning mb-2">

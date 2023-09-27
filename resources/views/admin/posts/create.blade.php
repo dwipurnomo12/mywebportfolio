@@ -1,6 +1,7 @@
 @extends('admin.layouts.main')
 
 @section('container')
+
 <div class="main-panel">
 	<div class="content">
 		<div class="page-inner">
@@ -36,7 +37,7 @@
             <div id="ajax-alert" class="alert alert-success alert-dismissable" role="alert" style="display:none"></div>
             <div id="ajax-alert-error" class="alert alert-danger alert-dismissable" role="alert" style="display:none"></div>
 
-            <form action="/admin/posts/create" method="POST" id="store">
+            <form action="/admin/posts/create" method="POST" id="store" enctype="multipart/form-data">
                 @csrf
                 <div class="row">
                     <div class="col-lg-8">
@@ -113,14 +114,34 @@
 <script>
     let editorInstance;
     ClassicEditor
-        .create( document.querySelector( '#editor' ) )
+        .create( document.querySelector( '#editor' ), {
+            ckfinder: {
+                uploadUrl: '{{ route('upload.image').'?_token='.csrf_token() }}', 
+                filebrowserUploadMethod: 'form',
+                onRemoveFile: function (file) {
+                    const imageUrl = file.data.url; // Mengakses data URL gambar
+                    if (imageUrl) {
+                        axios.post('{{ route('delete.image') }}', { imageUrl })
+                            .then(response => {
+                                console.log('Image deleted from storage.');
+                            })
+                            .catch(error => {
+                                console.error('Error deleting image from storage:', error);
+                            });
+                    }
+                }
+            },
+        })
         .then( editor => {
-             editorInstance =editor;
-        } )
+            editorInstance = editor;
+        })
         .catch( error => {
             console.error( error );
-        } );
+        });
 </script>
+
+
+
 
 <!-- Preview Image -->
 <script>
@@ -141,7 +162,7 @@
     });
 </script>
 
-<!--Store Function -->
+<!-- Store Function -->
 <script>
     $(document).ready(function(){
         $('#store').submit(function(e){

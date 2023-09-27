@@ -22,10 +22,10 @@
                   <a href="#Project" class="nav-link"><span data-hover="Projects">Projects</span></a>
               </li>
               <li class="nav-item">
-                  <a href="#posts" class="nav-link"><span data-hover="posts">Posts</span></a>
+                  <a href="#resume" class="nav-link"><span data-hover="Resume">Resume</span></a>
               </li>
               <li class="nav-item">
-                  <a href="#resume" class="nav-link"><span data-hover="Resume">Resume</span></a>
+                <a href="#posts" class="nav-link"><span data-hover="posts">Posts</span></a>
               </li>
               <li class="nav-item">
                   <a href="#contact" class="nav-link"><span data-hover="Contact">Contact</span></a>
